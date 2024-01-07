@@ -45,21 +45,19 @@ class Game:
             print(self.translations['lose'])
 
 
-    def play(self):
+def play(self):
+    try:
         while True:
-            try:
-                user_action = self.get_user_selection()
-            except ValueError as e:
-                range_str = f"[0, {len(Action) - 1}]"
-                print(f"Invalid selection. Enter a value in range {range_str}")
-                continue
-
+            user_action = self.get_user_selection()
             computer_action = self.get_computer_selection()
             self.determine_winner(user_action, computer_action)
 
             play_again = input("Play again? (y/n): ")
             if play_again.lower() != "y":
                 break
+    except KeyboardInterrupt:
+        print("\nGame interrupted. Exiting.")
+        exit()
 
 
 if __name__ == "__main__":
