@@ -9,12 +9,12 @@ class Action(IntEnum):
 
 
 class Game:
+    translations = {
+        'tie': "Both players selected {user_action.name}. It's a tie!",
+        'win': "{user_action.name} wins! {user_action.name} beats {computer_action.name}.",
+        'lose': "{user_action.name} loses. {computer_action.name} beats {user_action.name}.",
+    }
     def __init__(self):
-        self.translations = {
-            'tie': "Both players selected {user_action.name}. It's a tie!",
-            'win': "{user_action.name} wins! {user_action.name} beats {computer_action.name}.",
-            'lose': "{user_action.name} loses. {computer_action.name} beats {user_action.name}.",
-        }
 
 
     def get_user_selection(self):
