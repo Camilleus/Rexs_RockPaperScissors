@@ -27,10 +27,15 @@ class Game:
     def get_user_selection(self):
         while True:
             try:
-                choices = [f"{action.name.lower()}" for action in Action]
-                choices_str = ", ".join(choices)
-                selection = input(f"Enter a choice ({choices_str}): ").lower()
-                action = next(action for action in Action if action.name.lower() == selection)
+                selection = input("Enter a choice (Rock, Paper, Scissors or 0): ").capitalize()
+                if selection == '0':
+                    action = Action.Rock
+                elif selection == '1':
+                    action = Action.Paper
+                elif selection == '2':
+                    action = Action.Scissors
+                else:
+                    action = next(action for action in Action if action.name.lower() == selection.lower())
                 return action
             except StopIteration:
                 print("Invalid selection. Please enter a valid choice.")
