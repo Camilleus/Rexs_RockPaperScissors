@@ -1,5 +1,7 @@
 import random
 from enum import IntEnum
+import json
+from datetime import datetime
 
 
 class Action(IntEnum):
@@ -20,6 +22,7 @@ class Game:
         self.losses = 0
         self.draws = 0
         self.results_history = []
+        self.stats_history = []
 
     def get_user_selection(self):
         while True:
@@ -40,24 +43,45 @@ class Game:
 
     def determine_winner(self, user_action, computer_action):
         if user_action == computer_action:
-            print(self.translations['tie'])
+            result = 'tie'
             self.draws += 1
-            self.results_history.append('tie')
         elif (user_action, computer_action) in [(Action.Rock, Action.Scissors), (Action.Paper, Action.Rock), (Action.Scissors, Action.Paper)]:
-            print(self.translations['win'])
+            result = 'win'
             self.wins += 1
-            self.results_history.append('win')
         else:
-            print(self.translations['lose'])
+            result = 'lose'
             self.losses += 1
-            self.results_history.append('lose')
+
+        series_wins = self.calculate_series_wins(result)
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        self.results_history.append({'timestamp': timestamp, 'result': result, 'series_wins': series_wins})
+        self.stats_history.append({'timestamp': timestamp, 'wins': self.wins, 'losses': self.losses, 'draws': self.draws})
+
+    def calculate_series_wins(self, result):
+        # One Day I will do that
+        return 0
 
     def display_stats(self):
         print(f"Wins: {self.wins}, Losses: {self.losses}, Draws: {self.draws}")
 
     def display_history(self):
         print("Results History:")
-        print(", ".join(self.results_history))
+        for entry in self.results_history:
+            print(entry)
+
+        print("\nStats History:")
+        for entry in self.stats_history:
+            print(entry)
+
+    def save_history_to_json(self):
+        data = {
+            'results_history': self.results_history,
+            'stats_history': self.stats_history
+        }
+
+        with open('history.json', 'w') as file:
+            json.dump(data, file, indent=4)
 
     def play(self):
         try:
@@ -68,9 +92,11 @@ class Game:
 
                 play_again = input("Play again? (y/n): ")
                 if play_again.lower() != "y":
+                    self.save_history_to_json()
                     break
         except KeyboardInterrupt:
             print("\nGame interrupted. Exiting.")
+            self.save_history_to_json()
             exit()
 
 
