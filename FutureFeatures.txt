@@ -1,0 +1,26 @@
+Pomysły na rozszerzenie Rock Paper Scissors:
+
+
+Dodaj poziomy trudności dla komputera:
+    Stwórz kilka poziomów trudności dla komputera, gdzie na przykład łatwy poziom może mieć prostą losową decyzję, a trudny poziom może opierać się na bardziej zaawansowanym algorytmie.
+
+Możliwość dostosowania serii zwycięstw do wygranej:
+    Pozwól graczowi dostosować ilość zwycięstw potrzebnych do ogólnej wygranej. Na przykład, aby wygrać grę, gracz musi zdobyć 3 zwycięstwa z rzędu.
+
+Wybór języka:
+    Dodaj możliwość wyboru języka gry. Utwórz tłumaczenia dla różnych języków i pozwól graczowi wybrać preferowany język.
+
+Dodaj animacje lub interfejs graficzny:
+    Utwórz prosty interfejs graficzny (GUI) lub dodaj animacje do gry, aby uczynić ją bardziej atrakcyjną wizualnie.
+
+Rozszerzenie historii i statystyk:
+    Dodaj bardziej zaawansowane statystyki, takie jak procentowe wskaźniki zwycięstw, przegranych i remisów. Możesz również śledzić, jakie ruchy były najczęściej wybierane przez gracza i komputer.
+
+Możliwość zapisywania historii i statystyk online:
+    Stwórz prostą bazę danych, aby zapisywać historię gier i statystyki online. Gracz mógłby mieć możliwość utworzenia konta i śledzenia swoich postępów z różnych urządzeń.
+
+Rozszerzenia dla nowych ruchów:
+    Dodaj nowe ruchy, takie jak "Well" lub "Fire," i dostosuj logikę wygrywania i przegrywania dla tych nowych elementów.
+
+Dźwięki i efekty dźwiękowe:
+    Dodaj dźwięki dla różnych wydarzeń w grze, takie jak wygrane, przegrane i remisy, aby uczynić doświadczenie bardziej interaktywnym.
