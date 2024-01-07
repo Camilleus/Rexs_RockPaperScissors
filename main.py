@@ -27,14 +27,13 @@ class Game:
     def get_user_selection(self):
         while True:
             try:
-                choices = [f"{action.name}" for action in Action]
+                choices = [f"{action.name.lower()}" for action in Action]
                 choices_str = ", ".join(choices)
-                selection = int(input(f"Enter a choice ({choices_str}): "))
-                action = Action(selection)
+                selection = input(f"Enter a choice ({choices_str}): ").lower()
+                action = next(action for action in Action if action.name.lower() == selection)
                 return action
-            except (ValueError, IndexError):
-                range_str = f"[{', '.join(map(str, range(len(Action))))}]"
-                print(f"Invalid selection. Enter a value in range {range_str}")
+            except StopIteration:
+                print("Invalid selection. Please enter a valid choice.")
 
     def get_computer_selection(self):
         selection = random.randint(0, len(Action) - 1)
