@@ -1,14 +1,19 @@
-#Rock Paper Scissors game! 
-
-
-
 import random
 from enum import IntEnum
+
+
+translations = {
+    'tie': "Both players selected {user_action.name}. It's a tie!",
+    'win': "{user_action.name} wins! {user_action.name} beats {computer_action.name}.",
+    'lose': "{user_action.name} loses. {computer_action.name} beats {user_action.name}.",
+}
+
 
 class Action(IntEnum):
     Rock = 0
     Paper = 1
     Scissors = 2
+
 
 def get_user_selection():
     while True:
@@ -27,6 +32,7 @@ def get_computer_selection():
     selection = random.randint(0, len(Action) - 1)
     action = Action(selection)
     return action
+
 
 def determine_winner(user_action, computer_action):
     if user_action == computer_action:
@@ -47,6 +53,16 @@ def determine_winner(user_action, computer_action):
         else:
             print("Rock smashes scissors! You lose.")
 
+
+def print_result(user_action, computer_action):
+    if user_action == computer_action:
+        print(translations['tie'])
+    elif (user_action, computer_action) in [(Action.Rock, Action.Scissors), (Action.Paper, Action.Rock), (Action.Scissors, Action.Paper)]:
+        print(translations['win'])
+    else:
+        print(translations['lose'])
+        
+        
 while True:
     try:
         user_action = get_user_selection()
