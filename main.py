@@ -12,9 +12,9 @@ class Action(IntEnum):
 
 class Game:
     translations = {
-        'tie': "Both players selected {user_action.name}. It's a tie!",
-        'win': "{user_action.name} wins! {user_action.name} beats {computer_action.name}.",
-        'lose': "{user_action.name} loses. {computer_action.name} beats {user_action.name}.",
+        'tie': "Both players selected {user_action}. It's a tie!",
+        'win': "{user_action} wins! {user_action} beats {computer_action}.",
+        'lose': "{user_action} loses. {computer_action} beats {user_action}.",
     }
 
     def __init__(self):
@@ -27,13 +27,13 @@ class Game:
     def get_user_selection(self):
         while True:
             try:
-                choices = [f"{action.name}[{action.value}]" for action in Action]
+                choices = [f"{action.name}" for action in Action]
                 choices_str = ", ".join(choices)
                 selection = int(input(f"Enter a choice ({choices_str}): "))
                 action = Action(selection)
                 return action
             except (ValueError, IndexError):
-                range_str = f"[0, {len(Action) - 1}]"
+                range_str = f"[{', '.join(map(str, range(len(Action))))}]"
                 print(f"Invalid selection. Enter a value in range {range_str}")
 
     def get_computer_selection(self):
@@ -42,6 +42,9 @@ class Game:
         return action
 
     def determine_winner(self, user_action, computer_action):
+        user_action_name = user_action.name
+        computer_action_name = computer_action.name
+
         if user_action == computer_action:
             result = 'tie'
             self.draws += 1
@@ -57,6 +60,8 @@ class Game:
 
         self.results_history.append({'timestamp': timestamp, 'result': result, 'series_wins': series_wins})
         self.stats_history.append({'timestamp': timestamp, 'wins': self.wins, 'losses': self.losses, 'draws': self.draws})
+
+        print(f"\nResult: {self.translations[result].format(user_action=user_action_name, computer_action=computer_action_name)}")
 
     def calculate_series_wins(self, result):
         # One Day I will do that
