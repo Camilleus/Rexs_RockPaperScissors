@@ -11,11 +11,17 @@ class Action(IntEnum):
     Scissors = 2
 
 def get_user_selection():
-    choices = [f"{action.name}[{action.value}]" for action in Action]
-    choices_str = ", ".join(choices)
-    selection = int(input(f"Enter a choice ({choices_str}): "))
-    action = Action(selection)
-    return action
+    while True:
+        try:
+            choices = [f"{action.name}[{action.value}]" for action in Action]
+            choices_str = ", ".join(choices)
+            selection = int(input(f"Enter a choice ({choices_str}): "))
+            action = Action(selection)
+            return action
+        except (ValueError, IndexError):
+            range_str = f"[0, {len(Action) - 1}]"
+            print(f"Invalid selection. Enter a value in range {range_str}")
+
 
 def get_computer_selection():
     selection = random.randint(0, len(Action) - 1)
